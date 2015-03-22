@@ -87,6 +87,7 @@ module ProMotion
     def collectionView(view, cellForItemAtIndexPath: index_path)
       view.dequeueReusableCellWithReuseIdentifier(reuse_identifier, forIndexPath: index_path).tap do |cell|
         cell_data = cell_data_from_index_path(index_path)
+        set_attributes(cell, cell_data) if self.respond_to?(:set_attributes)
         if cell.respond_to?(:reused) && cell.reused
           self.on_cell_reused(cell) if self.respond_to?(:on_cell_reused)
         else
